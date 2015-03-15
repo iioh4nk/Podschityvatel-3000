@@ -1,0 +1,231 @@
+unit Unit2;
+interface
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ComCtrls,
+  Vcl.ExtCtrls, Vcl.ShellAnimations, shellapi, MetropolisUI.Tile, Vcl.Grids,
+  Vcl.ValEdit, Vcl.Menus;
+type
+  TForm2 = class(TForm)
+    BitBtn1: TBitBtn;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Label1: TLabel;
+    CheckBox1: TCheckBox;
+    Edit3: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    BitBtn2: TBitBtn;
+    Label4: TLabel;
+    Edit4: TEdit;
+    Label5: TLabel;
+    Edit5: TEdit;
+    Label6: TLabel;
+    BitBtn3: TBitBtn;
+    Edit6: TEdit;
+    Button: TButton;
+    Label7: TLabel;
+    Label8: TLabel;
+    Memo1: TMemo;
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
+    N7: TMenuItem;
+    N8: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N9: TMenuItem;
+    N10: TMenuItem;
+    N11: TMenuItem;
+    FileOpen: TFileOpenDialog;
+    FileSave: TFileSaveDialog;
+    N12: TMenuItem;
+    N13: TMenuItem;
+    N14: TMenuItem;
+    N16: TMenuItem;
+    N15: TMenuItem;
+    N17: TMenuItem;
+    Edit7: TEdit;
+    SpeedButton1: TSpeedButton;
+    BitBtn4: TBitBtn;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure Label6Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure ButtonClick(Sender: TObject);
+    procedure N10Click(Sender: TObject);
+    procedure N11Click(Sender: TObject);
+    procedure N4Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure N8Click(Sender: TObject);
+    procedure N14Click(Sender: TObject);
+    procedure N9Click(Sender: TObject);
+    procedure N7Click(Sender: TObject);
+    procedure N13Click(Sender: TObject);
+    procedure N15Click(Sender: TObject);
+    procedure N17Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+var
+  Form2: TForm2;
+  s:real; {сумма}
+  k:real; {курс валюты}
+  k0:real; {курс валюты + конвертация}
+  i:real; {итого}
+  kv:real; {конвертация}
+  p:real; {проценты накрутки}
+  n:real; {накрутка}
+implementation
+{$R *.dfm}
+procedure TForm2.BitBtn1Click(Sender: TObject);
+begin
+s:=StrToFloat(Edit1.Text);
+k:=StrToFloat(Edit2.Text);
+kv:=StrToFloat(Edit7.Text);
+if CheckBox1.Checked=true then begin
+k0:=k+((k/100)*kv);
+i:=s*k0 end else
+begin
+i:=s*k
+end;
+Edit3.Text:=FloatToStr(i);
+if Length(Edit4.Text)=0 then else begin
+                                   p:=StrToFloat(Edit4.Text);
+                                   n:=i+(i/100)*p;
+                                   Edit5.Text:=FloatToStr(n);
+                                  end;
+ {BitBtn1.Default:=False;
+ BitBtn2.Default:=True;}
+end;
+procedure TForm2.BitBtn2Click(Sender: TObject);
+begin
+Edit1.Clear;
+Edit2.Clear;
+Edit3.Clear;
+Edit4.Clear;
+Edit5.Clear;
+ {BitBtn2.Default:=False;
+ BitBtn1.Default:=True;}
+end;
+procedure TForm2.BitBtn3Click(Sender: TObject);
+begin
+if FormStyle=fsNormal then FormStyle:=fsStayOnTop else FormStyle:=fsNormal;
+end;
+procedure TForm2.ButtonClick(Sender: TObject);
+begin
+Memo1.Lines.Add(Edit6.Text + ' | ' + Edit3.Text + ' | ' + Edit5.Text);
+Edit6.Clear;
+end;
+
+procedure TForm2.FormCreate(Sender: TObject);
+begin
+ClientWidth:=243;
+N11.Enabled:=False;
+N17.Enabled:=False;
+end;
+
+procedure TForm2.Label6Click(Sender: TObject);
+begin
+ShellExecute(0, 'open', 'http://vk.com/iioh4nk56', nil, nil, sw_show);
+ShellExecute(0, 'open', 'http://iioh4nk.tk', nil, nil, sw_show);
+end;
+procedure TForm2.N10Click(Sender: TObject);
+begin
+ClientWidth:=490;
+N10.Enabled:=False;
+N11.Enabled:=True;
+BitBtn4.Caption:='<'
+end;
+
+procedure TForm2.N11Click(Sender: TObject);
+begin
+ClientWidth:=243;
+N10.Enabled:=True;
+N11.Enabled:=False;
+BitBtn4.Caption:='>'
+end;
+
+procedure TForm2.N13Click(Sender: TObject);
+begin
+ShellExecute(0, 'open', 'http://vk.com/iioh4nk56', nil, nil, sw_show);
+end;
+
+procedure TForm2.N14Click(Sender: TObject);
+begin
+ShellExecute(0, 'open', 'http://iioh4nk.tk', nil, nil, sw_show);
+end;
+
+procedure TForm2.N15Click(Sender: TObject);
+begin
+{if FormStyle=fsStayOnTop then FormStyle:=fsNormal else FormStyle:=fsStayOnTop;}
+FormStyle:=fsStayOnTop;
+N15.Enabled:=False;
+N17.Enabled:=True;
+
+end;
+
+procedure TForm2.N17Click(Sender: TObject);
+begin
+{if FormStyle=fsStayOnTop then FormStyle:=fsNormal else FormStyle:=fsStayOnTop;}
+FormStyle:=fsNormal;
+N17.Enabled:=False;
+N15.Enabled:=True;
+end;
+
+procedure TForm2.N2Click(Sender: TObject);
+begin
+Edit1.Clear;
+Edit2.Clear;
+Edit3.Clear;
+Edit4.Clear;
+Edit5.Clear;
+end;
+
+procedure TForm2.N4Click(Sender: TObject);
+begin
+Close;
+end;
+
+procedure TForm2.N7Click(Sender: TObject);
+begin
+if FileSave.Execute then
+  begin
+  Memo1.Lines.SaveToFile(FileSave.FileName);
+  end;
+
+end;
+
+procedure TForm2.N8Click(Sender: TObject);
+begin
+Memo1.Clear;
+Edit6.Clear;
+end;
+
+procedure TForm2.N9Click(Sender: TObject);
+begin
+if FileOpen.Execute then
+  begin
+  Memo1.Lines.LoadFromFile(FileOpen.FileName);
+  end;
+end;
+
+procedure TForm2.SpeedButton1Click(Sender: TObject);
+begin
+if ClientWidth=243 then ClientWidth:=490 else
+                                          begin
+                                          ClientWidth:=243
+                                          end;
+end;
+procedure TForm2.BitBtn4Click(Sender: TObject);
+begin
+if ClientWidth=243 then begin ClientWidth:=490; BitBtn4.Caption:='<' end else begin ClientWidth:=243; BitBtn4.Caption:='>' end;
+end;
+end.
